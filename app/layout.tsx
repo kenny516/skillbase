@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
 
 import "./globals.css";
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Skillbase",
-  description: "Design reusable AI skills in Markdown.",
+    title: "Skillbase — Reusable AI Skill Drafting",
+    description: "Design structured, reusable AI skills in Markdown. Build faster with a dense, focused workspace inspired by Raycast.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body className={jetbrainsMono.className}>{children}</body>
-    </html>
-  );
+    return (
+        <html lang="en" className="dark">
+            <body>{children}</body>
+        </html>
+    );
 }

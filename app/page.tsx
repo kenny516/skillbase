@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import LightPillar from "@/components/animated/light-pillar";
+import { SkillbaseLogo } from "@/components/brand/skillbase-logo";
 
 import {
     ArrowRightIcon,
@@ -24,10 +25,11 @@ export default function Home() {
                 <div className="flex items-center justify-between max-w-6xl px-5 mx-auto h-14">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2.5 group">
-                        <div className="flex size-7 items-center justify-center rounded-lg bg-violet-600 text-[11px] font-bold text-white shadow-[0_0_16px_rgba(124,58,237,0.5)] transition group-hover:shadow-[0_0_20px_rgba(124,58,237,0.65)]">
-                            S
-                        </div>
-                        <span className="text-sm font-semibold tracking-tight">Skillbase</span>
+                        <SkillbaseLogo
+                            size={28}
+                            iconClassName="transition-transform duration-300 group-hover:scale-[1.04]"
+                            labelClassName="transition-colors duration-300 group-hover:text-cyan-50"
+                        />
                     </Link>
 
                     {/* Links */}
@@ -446,10 +448,12 @@ export default function Home() {
             <footer className="border-t border-white/[0.06]">
                 <div className="flex items-center justify-between max-w-6xl px-5 py-6 mx-auto">
                     <div className="flex items-center gap-2">
-                        <div className="flex size-5 items-center justify-center rounded-md bg-violet-600 text-[9px] font-bold text-white">
-                            S
-                        </div>
-                        <span className="text-xs text-zinc-500">Skillbase</span>
+                        <SkillbaseLogo
+                            size={20}
+                            compact
+                            iconClassName="border-white/[0.08] bg-[#11131a]"
+                            labelClassName="text-xs text-zinc-500"
+                        />
                     </div>
                     <p className="text-xs text-zinc-600">Minimal AI skill drafting workspace</p>
                 </div>

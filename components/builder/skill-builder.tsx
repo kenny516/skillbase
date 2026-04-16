@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useMemo, useState } from "react";
 
+import { SkillbaseLogo } from "@/components/brand/skillbase-logo";
 import { MarkdownRenderer } from "@/components/builder/markdown-renderer";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -159,10 +160,12 @@ export function SkillBuilder() {
                         href="/"
                         className="flex items-center gap-1.5 text-zinc-500 transition hover:text-zinc-300"
                     >
-                        <div className="flex size-5 items-center justify-center rounded-md bg-violet-600 text-[9px] font-bold text-white">
-                            S
-                        </div>
-                        <span className="hidden sm:inline">Skillbase</span>
+                        <SkillbaseLogo
+                            size={20}
+                            compact
+                            iconClassName="border-white/[0.08] bg-[#11131a]"
+                            labelClassName="hidden text-zinc-300 sm:inline"
+                        />
                     </Link>
                     <span className="text-zinc-700">/</span>
                     <span className="font-medium text-zinc-300">Builder</span>

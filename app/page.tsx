@@ -1,8 +1,7 @@
 import Link from "next/link";
 
-import LightPillar from "@/components/animated/light-pillar";
+import { HeroScene } from "@/components/animated/hero-scene";
 import { SkillbaseLogo } from "@/components/brand/skillbase-logo";
-
 import {
     ArrowRightIcon,
     CodeIcon,
@@ -18,303 +17,262 @@ import {
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-[#09090b] text-[#f4f4f5]">
+        <div className="min-h-screen bg-[#08080a] text-zinc-100 antialiased selection:bg-violet-500/30">
+            <BackgroundOrnaments />
 
             {/* Nav */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-[#09090b]/80 backdrop-blur-lg border-b border-white/[0.06]">
-                <div className="flex items-center justify-between max-w-6xl px-5 mx-auto h-14">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2.5 group">
+            <header className="sticky top-0 z-50 border-b border-white/[0.05] bg-[#08080a]/70 backdrop-blur-xl">
+                <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+                    <Link href="/" className="group flex items-center gap-2.5">
                         <SkillbaseLogo
-                            size={28}
-                            iconClassName="transition-transform duration-300 group-hover:scale-[1.04]"
-                            labelClassName="transition-colors duration-300 group-hover:text-cyan-50"
+                            size={26}
+                            iconClassName="border-white/10 bg-[#0f1118] transition-transform duration-300 group-hover:scale-[1.04]"
+                            labelClassName="transition-colors duration-300 group-hover:text-white"
                         />
                     </Link>
 
-                    {/* Links */}
-                    <nav className="hidden sm:flex items-center gap-0.5">
-                        {["Features", "Preview", "Workflow"].map((item) => (
+                    <nav className="hidden items-center gap-1 md:flex">
+                        {[
+                            { l: "Features", h: "#features" },
+                            { l: "Workflow", h: "#workflow" },
+                            { l: "Preview", h: "#preview" },
+                        ].map((item) => (
                             <a
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
-                                className="px-3 py-1.5 text-sm text-zinc-400 rounded-lg transition hover:text-white hover:bg-white/[0.05]"
+                                key={item.l}
+                                href={item.h}
+                                className="rounded-md px-3 py-1.5 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white"
                             >
-                                {item}
+                                {item.l}
                             </a>
                         ))}
                     </nav>
 
-                    {/* CTA */}
                     <Link
                         href="/builder"
-                        className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-violet-600 px-3.5 text-sm font-medium text-white transition hover:bg-violet-500 shadow-[0_0_16px_rgba(124,58,237,0.35)] hover:shadow-[0_0_24px_rgba(124,58,237,0.5)] active:scale-95"
+                        className="group inline-flex h-9 items-center gap-1.5 rounded-lg bg-white px-3.5 text-sm font-medium text-zinc-900 shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_8px_24px_rgba(255,255,255,0.08)] transition hover:bg-zinc-100 active:scale-[0.97]"
                     >
-                        Open builder
-                        <ArrowRightIcon size={13} />
+                        <span className="hidden sm:inline">Open builder</span>
+                        <span className="sm:hidden">Builder</span>
+                        <ArrowRightIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
                     </Link>
                 </div>
             </header>
 
             {/* Hero */}
-            <section className="relative flex flex-col items-center justify-center min-h-screen px-5 pt-32 pb-24 overflow-hidden">
-                <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
-                    <LightPillar
-                        topColor="#7c3aed"
-                        bottomColor="#c084fc"
-                        intensity={0.8}
-                        rotationSpeed={0.2}
-                        glowAmount={0.004}
-                        pillarWidth={2.0}
-                        pillarHeight={0.35}
-                        noiseIntensity={0.3}
-                        pillarRotation={0}
-                        interactive={false}
-                        mixBlendMode="screen"
-                        quality="high"
-                    />
-                </div>
+            <section className="relative isolate overflow-hidden px-4 pb-24 pt-20 sm:px-6 sm:pt-28 lg:pt-36">
+                <HeroScene />
 
-                <div className="relative z-10 flex flex-col items-center text-center">
-                    {/* Badge */}
-                    <div className="fade-up mb-7 inline-flex items-center gap-2 rounded-full border border-violet-500/20 bg-violet-500/10 px-3.5 py-1.5 text-xs font-medium text-violet-300">
-                        <SparklesIcon size={11} />
-                        AI Skill Drafting Workspace
-                    </div>
+                <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+                    <a
+                        href="#features"
+                        className="fade-up group mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-zinc-400 backdrop-blur transition hover:border-violet-400/40 hover:text-zinc-200"
+                    >
+                        <span className="size-1.5 rounded-full bg-violet-400 shadow-[0_0_8px_rgba(139,92,246,0.8)]" />
+                        AI skill drafting workspace
+                        <ArrowRightIcon size={11} className="text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-zinc-300" />
+                    </a>
 
-                    {/* Headline */}
-                    <h1 className="fade-up-delay max-w-[14ch] text-[clamp(3rem,7.5vw,5.8rem)] font-semibold leading-[0.92] tracking-[-0.05em]">
-                        Build AI skills{" "}
-                        <span
-                            className="inline-block"
-                            style={{
-                                background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 45%, #c084fc 100%)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                backgroundClip: "text",
-                            }}
-                        >
-                            that last.
+                    <h1 className="fade-up-delay text-balance text-[clamp(2.5rem,8vw,5.25rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white">
+                        Design AI skills{" "}
+                        <span className="bg-[linear-gradient(120deg,#c4b5fd_0%,#a78bfa_40%,#f0abfc_100%)] bg-clip-text text-transparent">
+                            you actually reuse.
                         </span>
                     </h1>
 
-                    <p className="fade-up-slow mt-7 max-w-[44ch] text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
-                        Skillbase is a minimal workspace for drafting reusable AI skills
-                        in structured Markdown — input on one side, live preview on the other.
+                    <p className="fade-up-slow mt-6 max-w-[52ch] text-pretty text-base leading-7 text-zinc-400 sm:text-[17px] sm:leading-8">
+                        A focused, structured workspace for drafting reusable AI skills in
+                        Markdown. Inputs on the left, live preview on the right — built for
+                        the loop, not the demo.
                     </p>
 
-                    {/* CTAs */}
-                    <div className="flex flex-wrap items-center justify-center gap-3 mt-10 fade-up-slow">
+                    <div className="fade-up-slow mt-9 flex w-full flex-col items-stretch justify-center gap-2.5 sm:w-auto sm:flex-row sm:gap-3">
                         <Link
                             href="/builder"
-                            className="inline-flex h-11 items-center gap-2 rounded-xl bg-violet-600 px-6 text-sm font-semibold text-white shadow-[0_0_24px_rgba(124,58,237,0.4)] transition hover:bg-violet-500 hover:shadow-[0_0_32px_rgba(124,58,237,0.55)] active:scale-95"
+                            className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(139,92,246,0.4),0_8px_28px_rgba(124,58,237,0.45)] transition hover:bg-violet-500 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.5),0_12px_40px_rgba(124,58,237,0.6)] active:scale-[0.97]"
                         >
                             <SparklesIcon size={14} />
                             Start building
+                            <ArrowRightIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
                         </Link>
                         <a
-                            href="#features"
-                            className="inline-flex h-11 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-6 text-sm font-medium text-zinc-300 transition hover:bg-white/[0.07] hover:text-white"
+                            href="#preview"
+                            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-6 text-sm font-medium text-zinc-300 backdrop-blur transition hover:border-white/20 hover:bg-white/[0.06] hover:text-white"
                         >
-                            See how it works
-                            <ArrowRightIcon size={13} />
+                            See the workspace
                         </a>
                     </div>
-                </div>
 
-                {/* Scroll hint */}
-                <div className="absolute flex flex-col items-center gap-2 -translate-x-1/2 bottom-10 left-1/2 opacity-30">
-                    <div className="w-px h-8 bg-gradient-to-b from-transparent to-zinc-400" />
+                    {/* Quick keystroke hint */}
+                    <div className="fade-up-slow mt-10 flex items-center gap-2 text-xs text-zinc-500">
+                        <span>Built for keyboard flow</span>
+                        <kbd className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">⌘ K</kbd>
+                        <kbd className="rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">⌘ E</kbd>
+                    </div>
                 </div>
             </section>
 
             {/* Stats */}
-            <div className="relative border-y border-white/[0.06] bg-white/[0.015]">
-                <div className="grid max-w-5xl grid-cols-2 mx-auto sm:grid-cols-4">
+            <section className="relative border-y border-white/[0.05] bg-white/[0.012]">
+                <div className="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-y divide-white/[0.05] sm:grid-cols-4 sm:divide-y-0">
                     {[
                         { value: "4", label: "Skill types" },
                         { value: "YAML", label: "Frontmatter" },
                         { value: ".md", label: "Native export" },
                         { value: "0", label: "Lock-in" },
-                    ].map((s, i) => (
+                    ].map((s) => (
                         <div
                             key={s.label}
-                            className={`flex flex-col items-center gap-1 px-6 py-7 text-center ${i < 3 ? "border-r border-white/[0.06]" : ""} ${i === 2 ? "border-r-0 sm:border-r" : ""}`}
+                            className="flex flex-col items-center gap-1 px-6 py-7 text-center"
                         >
-                            <span className="text-2xl font-semibold tracking-tight text-white">{s.value}</span>
-                            <span className="text-xs text-zinc-500">{s.label}</span>
+                            <span className="bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-2xl font-semibold tracking-tight text-transparent">
+                                {s.value}
+                            </span>
+                            <span className="text-xs uppercase tracking-wider text-zinc-500">{s.label}</span>
                         </div>
                     ))}
                 </div>
-            </div>
+            </section>
 
             {/* Features */}
-            <section id="features" className="px-5 py-28">
-                <div className="max-w-6xl mx-auto">
-                    <div className="mb-14">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-violet-400">
+            <section id="features" className="px-4 py-24 sm:px-6 sm:py-28 lg:py-32">
+                <div className="mx-auto max-w-6xl">
+                    <div className="mb-12 max-w-2xl sm:mb-16">
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-400">
                             Features
                         </p>
-                        <h2 className="max-w-[20ch] text-[clamp(1.9rem,4.5vw,3rem)] font-semibold leading-[1.1] tracking-[-0.04em] text-white">
+                        <h2 className="text-balance text-[clamp(1.85rem,4.5vw,2.85rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-white">
                             Everything the drafting loop needs.
                         </h2>
-                        <p className="mt-4 max-w-[48ch] text-base text-zinc-400">
-                            No decorative steps. No loose prompts. Just a structured workspace
-                            that reduces the gap between intent and reusable output.
+                        <p className="mt-4 max-w-[52ch] text-base leading-7 text-zinc-400">
+                            No decorative steps. No loose prompts. A structured workspace that
+                            shrinks the gap between intent and reusable output.
                         </p>
                     </div>
 
-                    {/* Bento grid */}
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                        {/* Card 1 wide */}
-                        <div className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-7 lg:col-span-2 hover:border-white/[0.12] transition-all duration-300">
-                            <div className="pointer-events-none absolute -right-12 -top-12 size-48 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.08),transparent_70%)] transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
-                            <div className="flex items-center justify-center mb-5 border size-10 rounded-xl border-violet-500/20 bg-violet-500/10 text-violet-400">
-                                <WorkflowIcon size={18} />
-                            </div>
-                            <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">Focused input</h3>
-                            <p className="text-sm leading-7 text-zinc-400">
-                                The builder keeps every field narrow, explicit, and visible. Skill name, domain, type, context,
-                                entities, relationships — each section has exactly the room it needs, nothing more.
-                            </p>
-                            <div className="flex flex-wrap gap-2 mt-6">
-                                {["Skill name", "Domain", "Context", "Entities", "Business rules"].map((tag) => (
-                                    <span key={tag} className="rounded-full border border-white/[0.07] bg-white/[0.03] px-2.5 py-1 text-xs text-zinc-400">
-                                        {tag}
-                                    </span>
+                        <FeatureCard
+                            wide
+                            icon={<WorkflowIcon size={18} />}
+                            title="Focused input"
+                            description="Every field is narrow, explicit, and visible. Skill name, domain, type, context, entities, relationships — each section has exactly the room it needs."
+                            tags={["Skill name", "Domain", "Context", "Entities", "Business rules"]}
+                        />
+
+                        <FeatureCard
+                            icon={<ZapIcon size={18} />}
+                            title="Tight output loop"
+                            description="Write, preview, copy, export. The loop is four steps and stays four steps."
+                        >
+                            <div className="mt-4 space-y-1.5">
+                                {[
+                                    { i: <CopyIcon size={13} />, l: "Copy to clipboard", k: "⌘ C" },
+                                    { i: <DownloadIcon size={13} />, l: "Export as .md", k: "⌘ E" },
+                                ].map((row) => (
+                                    <div
+                                        key={row.l}
+                                        className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-black/30 px-3 py-2"
+                                    >
+                                        <span className="text-violet-400">{row.i}</span>
+                                        <span className="text-xs text-zinc-400">{row.l}</span>
+                                        <kbd className="ml-auto rounded border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">{row.k}</kbd>
+                                    </div>
                                 ))}
                             </div>
-                        </div>
+                        </FeatureCard>
 
-                        {/* Card 2 */}
-                        <div className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-7 hover:border-white/[0.12] transition-all duration-300">
-                            <div className="pointer-events-none absolute -right-8 -top-8 size-36 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="flex items-center justify-center mb-5 border size-10 rounded-xl border-violet-500/20 bg-violet-500/10 text-violet-400">
-                                <ZapIcon size={18} />
-                            </div>
-                            <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">Tight output loop</h3>
-                            <p className="text-sm leading-7 text-zinc-400">
-                                Write, preview, copy, export. The loop is four steps and stays four steps.
-                            </p>
-                            <div className="mt-5 flex items-center gap-2 rounded-xl border border-white/[0.07] bg-black/30 px-3 py-2.5">
-                                <CopyIcon size={13} className="text-violet-400" />
-                                <span className="text-xs text-zinc-400">Copy to clipboard</span>
-                                <span className="ml-auto rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-500">Cmd C</span>
-                            </div>
-                            <div className="mt-2 flex items-center gap-2 rounded-xl border border-white/[0.07] bg-black/30 px-3 py-2.5">
-                                <DownloadIcon size={13} className="text-violet-400" />
-                                <span className="text-xs text-zinc-400">Export as .md</span>
-                                <span className="ml-auto rounded border border-white/[0.08] bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-zinc-500">Cmd E</span>
-                            </div>
-                        </div>
+                        <FeatureCard
+                            icon={<LayersIcon size={18} />}
+                            title="Reusable by default"
+                            description="Portable Markdown files. Move them between repos and workflows without rewriting."
+                        />
 
-                        {/* Card 3 */}
-                        <div className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-7 hover:border-white/[0.12] transition-all duration-300">
-                            <div className="pointer-events-none absolute -right-8 -top-8 size-36 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="flex items-center justify-center mb-5 border size-10 rounded-xl border-violet-500/20 bg-violet-500/10 text-violet-400">
-                                <LayersIcon size={18} />
-                            </div>
-                            <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">Reusable by default</h3>
-                            <p className="text-sm leading-7 text-zinc-400">
-                                Skills are portable Markdown files. Move them between repos and workflows without rewriting.
-                            </p>
-                        </div>
+                        <FeatureCard
+                            icon={<CodeIcon size={18} />}
+                            title="Live Markdown preview"
+                            description="The preview updates as you type. Toggle between rendered and raw at any time."
+                        />
 
-                        {/* Card 4 */}
-                        <div className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] p-7 hover:border-white/[0.12] transition-all duration-300">
-                            <div className="pointer-events-none absolute -right-8 -top-8 size-36 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.07),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="flex items-center justify-center mb-5 border size-10 rounded-xl border-violet-500/20 bg-violet-500/10 text-violet-400">
-                                <CodeIcon size={18} />
-                            </div>
-                            <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">Live Markdown preview</h3>
-                            <p className="text-sm leading-7 text-zinc-400">
-                                The preview updates as you type. Toggle between rendered and raw at any time.
-                            </p>
-                        </div>
-
-                        {/* Card 5 wide */}
-                        <div className="relative overflow-hidden transition-all duration-300 border group rounded-2xl border-violet-500/20 bg-violet-950/20 p-7 lg:col-span-2 hover:border-violet-500/35">
-                            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_0%_100%,rgba(124,58,237,0.08),transparent)]" />
-                            <div className="relative">
-                                <div className="flex items-center justify-center mb-5 border size-10 rounded-xl border-violet-500/25 bg-violet-500/15 text-violet-300">
-                                    <FileTextIcon size={18} />
-                                </div>
-                                <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">Structured output, every time</h3>
-                                <p className="mb-5 text-sm leading-7 text-zinc-400">
-                                    YAML frontmatter, typed sections, consistent formatting across every skill you produce.
-                                </p>
-                                <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-xs leading-6 text-zinc-400">
-                                    <span className="text-violet-400">---</span>
-                                    <br />
-                                    <span className="text-zinc-500">name:</span> create_asset_checkout<br />
-                                    <span className="text-zinc-500">type:</span> WORKFLOW<br />
-                                    <span className="text-zinc-500">domain:</span> asset operations<br />
-                                    <span className="text-violet-400">---</span>
-                                </div>
-                            </div>
-                        </div>
+                        <FeatureCard
+                            featured
+                            icon={<FileTextIcon size={18} />}
+                            title="Structured output, every time"
+                            description="YAML frontmatter, typed sections, consistent formatting across every skill you produce."
+                        >
+                            <pre className="mt-5 overflow-x-auto rounded-xl border border-white/[0.07] bg-black/40 p-4 font-mono text-[11.5px] leading-6 text-zinc-400">
+                                <span className="text-violet-400">---</span>{"\n"}
+                                <span className="text-zinc-500">name:</span> create_asset_checkout{"\n"}
+                                <span className="text-zinc-500">type:</span> WORKFLOW{"\n"}
+                                <span className="text-zinc-500">domain:</span> asset operations{"\n"}
+                                <span className="text-violet-400">---</span>
+                            </pre>
+                        </FeatureCard>
                     </div>
                 </div>
             </section>
 
-            {/* Builder preview */}
-            <section id="preview" className="relative px-5 overflow-hidden py-28">
-                <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-[700px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.05),transparent_65%)]" />
-                <div className="relative max-w-6xl mx-auto">
-                    <div className="mb-12 text-center">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-violet-400">Live workspace</p>
-                        <h2 className="text-[clamp(1.9rem,4.5vw,3rem)] font-semibold tracking-[-0.04em] text-white">
+            {/* Workspace mockup */}
+            <section id="preview" className="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-28 lg:py-32">
+                <div className="pointer-events-none absolute left-1/2 top-1/2 size-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.06),transparent_65%)]" />
+
+                <div className="relative mx-auto max-w-6xl">
+                    <div className="mb-10 text-center sm:mb-14">
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-400">
+                            Live workspace
+                        </p>
+                        <h2 className="text-balance text-[clamp(1.85rem,4.5vw,2.85rem)] font-semibold tracking-[-0.04em] text-white">
                             The builder, in one view.
                         </h2>
-                        <p className="mx-auto mt-4 max-w-[44ch] text-base text-zinc-400">
-                            Form on the left, live Markdown preview on the right. Always visible, never hidden behind a tab.
+                        <p className="mx-auto mt-4 max-w-[48ch] text-base text-zinc-400">
+                            Form on the left, live Markdown on the right. Always visible —
+                            never hidden behind a tab.
                         </p>
                     </div>
 
-                    {/* Mockup frame */}
-                    <div className="overflow-hidden rounded-3xl border border-white/[0.09] bg-[#0d0d10] shadow-[0_32px_80px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.04)]">
-                        {/* Chrome bar */}
-                        <div className="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.02] px-4 py-3">
-                            <div className="flex items-center gap-2">
-                                <div className="size-2.5 rounded-full bg-white/10" />
-                                <div className="size-2.5 rounded-full bg-white/[0.07]" />
-                                <div className="size-2.5 rounded-full bg-white/[0.05]" />
+                    {/* Browser frame */}
+                    <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c0c10] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.04)] sm:rounded-3xl">
+                        <div className="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.015] px-4 py-3">
+                            <div className="flex items-center gap-1.5">
+                                {["#3a3a40", "#2a2a30", "#1f1f25"].map((c) => (
+                                    <div key={c} className="size-2.5 rounded-full" style={{ background: c }} />
+                                ))}
                             </div>
-                            <div className="flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.03] px-3 py-1.5 text-[11px] text-zinc-500">
-                                <span className="size-1.5 rounded-full bg-violet-500/60" />
+                            <div className="hidden items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 py-1 text-[11px] text-zinc-500 sm:flex">
+                                <span className="size-1.5 rounded-full bg-violet-400" />
                                 skillbase://builder
                             </div>
-                            <div className="flex items-center gap-1.5">
-                                {["Builder", "Preview", "Export"].map((tag) => (
-                                    <span key={tag} className="rounded-md border border-white/[0.06] bg-white/[0.02] px-2.5 py-0.5 text-[10px] text-zinc-500">
-                                        {tag}
+                            <div className="hidden items-center gap-1.5 sm:flex">
+                                {["Builder", "Preview", "Export"].map((t) => (
+                                    <span
+                                        key={t}
+                                        className="rounded-md border border-white/[0.06] bg-white/[0.02] px-2 py-0.5 text-[10px] text-zinc-500"
+                                    >
+                                        {t}
                                     </span>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Layout */}
                         <div className="grid lg:grid-cols-[340px_1fr]">
-                            {/* Left form */}
-                            <div className="border-b border-white/[0.06] p-6 lg:border-b-0 lg:border-r">
-                                <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-violet-400">
+                            {/* Form */}
+                            <div className="border-b border-white/[0.06] p-5 sm:p-6 lg:border-b-0 lg:border-r">
+                                <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-400">
                                     Skill definition
                                 </p>
-                                <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-3.5">
                                     {[
                                         { label: "Skill name", value: "create_asset_checkout" },
                                         { label: "Domain", value: "asset operations" },
                                         { label: "Type", value: "WORKFLOW" },
                                     ].map((f) => (
                                         <div key={f.label}>
-                                            <p className="mb-1.5 text-xs text-zinc-500">{f.label}</p>
-                                            <div className="flex h-8 items-center rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 text-xs text-zinc-300">
+                                            <p className="mb-1.5 text-[11px] text-zinc-500">{f.label}</p>
+                                            <div className="flex h-9 items-center rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 font-mono text-xs text-zinc-300">
                                                 {f.value}
                                             </div>
                                         </div>
                                     ))}
                                     <div>
-                                        <p className="mb-1.5 text-xs text-zinc-500">Project context</p>
+                                        <p className="mb-1.5 text-[11px] text-zinc-500">Project context</p>
                                         <div className="rounded-lg border border-white/[0.07] bg-white/[0.025] px-3 py-2.5 text-xs leading-6 text-zinc-400">
                                             Internal tooling for teams that request, approve, and track hardware or software asset checkouts.
                                         </div>
@@ -322,53 +280,60 @@ export default function Home() {
                                 </div>
                                 <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-5">
                                     <span className="text-xs text-zinc-500">Domain model ready</span>
-                                    <div className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-violet-600 px-3 text-xs font-medium text-white shadow-[0_0_12px_rgba(124,58,237,0.3)]">
+                                    <div className="inline-flex h-7 items-center gap-1.5 rounded-lg bg-violet-600 px-2.5 text-xs font-medium text-white shadow-[0_0_12px_rgba(124,58,237,0.3)]">
                                         <SparklesIcon size={11} />
                                         Generate
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Right preview */}
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-5">
-                                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-violet-400">Output preview</p>
-                                    <div className="flex items-center gap-1 rounded-lg border border-white/[0.07] bg-white/[0.02] p-0.5">
-                                        <button className="rounded-md bg-violet-600 px-3 py-1 text-[11px] font-medium text-white">Preview</button>
-                                        <button className="px-3 py-1 text-[11px] text-zinc-500">Raw MD</button>
+                            {/* Preview */}
+                            <div className="p-5 sm:p-6">
+                                <div className="mb-5 flex items-center justify-between">
+                                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-400">
+                                        Output preview
+                                    </p>
+                                    <div className="flex items-center gap-1 rounded-lg border border-white/[0.06] bg-white/[0.02] p-0.5">
+                                        <button className="rounded-md bg-violet-600 px-2.5 py-1 text-[11px] font-medium text-white">Preview</button>
+                                        <button className="px-2.5 py-1 text-[11px] text-zinc-500">Raw</button>
                                     </div>
                                 </div>
 
-                                <div className="p-5 overflow-hidden border rounded-2xl border-black/10 bg-zinc-50">
+                                <div className="overflow-hidden rounded-xl border border-black/10 bg-zinc-50 p-5">
                                     <div className="flex flex-col gap-2 text-xs leading-6">
                                         <span className="text-sm font-bold text-zinc-800">Create Asset Checkout</span>
-                                        <span className="text-zinc-400 text-[11px]">Type: WORKFLOW · Domain: asset operations</span>
-                                        <div className="h-px mt-1 bg-zinc-200" />
+                                        <span className="text-[11px] text-zinc-400">
+                                            Type: WORKFLOW · Domain: asset operations
+                                        </span>
+                                        <div className="mt-1 h-px bg-zinc-200" />
                                         <span className="font-semibold text-zinc-700">Inputs</span>
                                         {["Project context", "Domain entities", "Business rules"].map((item) => (
                                             <span key={item} className="flex items-center gap-2 text-zinc-600">
-                                                <span className="rounded-full size-1 bg-violet-400 shrink-0" />
+                                                <span className="size-1 shrink-0 rounded-full bg-violet-400" />
                                                 {item}
                                             </span>
                                         ))}
-                                        <div className="h-px mt-1 bg-zinc-200" />
+                                        <div className="mt-1 h-px bg-zinc-200" />
                                         <span className="font-semibold text-zinc-700">Output</span>
                                         <span className="flex items-center gap-2 text-zinc-600">
-                                            <span className="rounded-full size-1 bg-violet-400 shrink-0" />
+                                            <span className="size-1 shrink-0 rounded-full bg-violet-400" />
                                             Reusable Markdown skill file
                                         </span>
                                     </div>
                                 </div>
 
-                                <div className="mt-4 grid grid-cols-3 gap-2.5">
+                                <div className="mt-3 grid grid-cols-3 gap-2">
                                     {[
                                         { l: "Skill", v: "create_asset_checkout" },
                                         { l: "Type", v: "WORKFLOW" },
                                         { l: "Format", v: ".md" },
                                     ].map((m) => (
-                                        <div key={m.l} className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3">
+                                        <div
+                                            key={m.l}
+                                            className="rounded-lg border border-white/[0.06] bg-white/[0.02] p-2.5"
+                                        >
                                             <p className="text-[10px] uppercase tracking-[0.1em] text-zinc-500">{m.l}</p>
-                                            <p className="mt-1.5 truncate text-xs font-medium text-zinc-300">{m.v}</p>
+                                            <p className="mt-1 truncate font-mono text-[11px] text-zinc-300">{m.v}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -379,36 +344,37 @@ export default function Home() {
             </section>
 
             {/* Workflow */}
-            <section id="workflow" className="border-y border-white/[0.06] bg-white/[0.01] px-5 py-28">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-14">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.14em] text-violet-400">Workflow</p>
-                        <h2 className="text-[clamp(1.9rem,4.5vw,3rem)] font-semibold tracking-[-0.04em] text-white">
+            <section id="workflow" className="border-y border-white/[0.05] bg-white/[0.008] px-4 py-24 sm:px-6 sm:py-28">
+                <div className="mx-auto max-w-6xl">
+                    <div className="mb-12 text-center sm:mb-16">
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-violet-400">
+                            Workflow
+                        </p>
+                        <h2 className="text-balance text-[clamp(1.85rem,4.5vw,2.85rem)] font-semibold tracking-[-0.04em] text-white">
                             From blank to shipped in three steps.
                         </h2>
                     </div>
-                    <div className="grid gap-0 sm:grid-cols-3">
+                    <div className="relative grid gap-px bg-white/[0.05] sm:grid-cols-3">
                         {[
-                            { n: "01", icon: FileTextIcon, title: "Define the structure", desc: "Fill in skill name, domain, type, context, and domain model. Every field is intentional." },
+                            { n: "01", icon: FileTextIcon, title: "Define the structure", desc: "Fill in skill name, domain, type, context, and the domain model. Every field is intentional." },
                             { n: "02", icon: SparklesIcon, title: "Generate the draft", desc: "Hit generate. The structured Markdown skill is assembled from your inputs instantly." },
-                            { n: "03", icon: GitBranchIcon, title: "Copy and ship", desc: "Copy the Markdown or export the .md file directly into your repository." },
-                        ].map((step, i) => (
+                            { n: "03", icon: GitBranchIcon, title: "Copy and ship", desc: "Copy the Markdown or export the .md file straight into your repository." },
+                        ].map((step) => (
                             <div
                                 key={step.n}
-                                className={`relative p-8 ${i < 2 ? "sm:border-r border-white/[0.06]" : ""}`}
+                                className="group relative bg-[#08080a] p-7 transition hover:bg-white/[0.012] sm:p-9"
                             >
-                                {i < 2 && (
-                                    <div className="absolute bottom-0 left-8 right-0 h-px bg-white/[0.06] sm:hidden" />
-                                )}
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="flex items-center justify-center border size-9 rounded-xl border-violet-500/20 bg-violet-500/10 text-violet-400">
+                                <div className="mb-6 flex items-center gap-3">
+                                    <div className="flex size-9 items-center justify-center rounded-xl border border-violet-500/20 bg-violet-500/10 text-violet-400 transition group-hover:border-violet-400/40 group-hover:text-violet-300">
                                         <step.icon size={16} />
                                     </div>
-                                    <span className="font-mono text-[10px] font-semibold tracking-[0.15em] text-violet-400/60">
+                                    <span className="font-mono text-[10px] font-semibold tracking-[0.2em] text-violet-400/60">
                                         {step.n}
                                     </span>
                                 </div>
-                                <h3 className="mb-3 text-base font-semibold tracking-tight text-white">{step.title}</h3>
+                                <h3 className="mb-3 text-base font-semibold tracking-tight text-white">
+                                    {step.title}
+                                </h3>
                                 <p className="text-sm leading-7 text-zinc-400">{step.desc}</p>
                             </div>
                         ))}
@@ -417,47 +383,114 @@ export default function Home() {
             </section>
 
             {/* CTA */}
-            <section className="relative px-5 py-32 overflow-hidden">
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-none left-1/2 top-1/2">
-                    <div className="size-[600px] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.1),transparent_65%)] blur-3xl" />
-                </div>
-                <div className="relative max-w-2xl mx-auto text-center">
-                    <div className="inline-flex items-center justify-center mb-8 border size-14 rounded-2xl border-violet-500/20 bg-violet-500/10">
-                        <SparklesIcon size={22} className="text-violet-400" />
+            <section className="relative overflow-hidden px-4 py-28 sm:px-6 sm:py-32">
+                <div className="pointer-events-none absolute left-1/2 top-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.12),transparent_65%)] blur-3xl" />
+                <div className="relative mx-auto max-w-2xl text-center">
+                    <div className="mb-7 inline-flex size-14 items-center justify-center rounded-2xl border border-violet-400/25 bg-violet-500/10">
+                        <SparklesIcon size={22} className="text-violet-300" />
                     </div>
-                    <h2 className="text-[clamp(2.2rem,5vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-white">
+                    <h2 className="text-balance text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.05] tracking-[-0.045em] text-white">
                         Ready to build skills that ship?
                     </h2>
-                    <p className="mx-auto mt-6 max-w-[40ch] text-base leading-7 text-zinc-400">
-                        Open the builder and get a structured, reusable Markdown skill in under a minute.
+                    <p className="mx-auto mt-5 max-w-[44ch] text-base leading-7 text-zinc-400">
+                        Open the builder and get a structured, reusable Markdown skill in
+                        under a minute.
                     </p>
-                    <div className="mt-10">
+                    <div className="mt-9">
                         <Link
                             href="/builder"
-                            className="inline-flex h-12 items-center gap-2.5 rounded-xl bg-violet-600 px-8 text-sm font-semibold text-white shadow-[0_0_32px_rgba(124,58,237,0.4)] transition hover:bg-violet-500 hover:shadow-[0_0_48px_rgba(124,58,237,0.55)] active:scale-95"
+                            className="group inline-flex h-12 items-center gap-2.5 rounded-xl bg-violet-600 px-7 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(139,92,246,0.4),0_8px_28px_rgba(124,58,237,0.45)] transition hover:bg-violet-500 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.5),0_12px_44px_rgba(124,58,237,0.6)] active:scale-[0.97]"
                         >
                             <SparklesIcon size={15} />
                             Open builder
-                            <ArrowRightIcon size={14} />
+                            <ArrowRightIcon size={14} className="transition-transform group-hover:translate-x-0.5" />
                         </Link>
                     </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="border-t border-white/[0.06]">
-                <div className="flex items-center justify-between max-w-6xl px-5 py-6 mx-auto">
-                    <div className="flex items-center gap-2">
-                        <SkillbaseLogo
-                            size={20}
-                            compact
-                            iconClassName="border-white/[0.08] bg-[#11131a]"
-                            labelClassName="text-xs text-zinc-500"
-                        />
-                    </div>
+            <footer className="border-t border-white/[0.05]">
+                <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-5 py-6 text-center sm:flex-row sm:text-left">
+                    <SkillbaseLogo
+                        size={20}
+                        compact
+                        iconClassName="border-white/[0.08] bg-[#0f1118]"
+                        labelClassName="text-xs text-zinc-500"
+                    />
                     <p className="text-xs text-zinc-600">Minimal AI skill drafting workspace</p>
                 </div>
             </footer>
+        </div>
+    );
+}
+
+/* Sub-components */
+
+function BackgroundOrnaments() {
+    return (
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-0">
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.025)_1px,transparent_1px)] [background-size:32px_32px]" />
+            <div className="absolute inset-x-0 top-0 h-[500px] bg-[radial-gradient(ellipse_70%_45%_at_50%_-10%,rgba(139,92,246,0.10),transparent)]" />
+        </div>
+    );
+}
+
+function FeatureCard({
+    icon,
+    title,
+    description,
+    tags,
+    children,
+    wide,
+    featured,
+}: {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+    tags?: string[];
+    children?: React.ReactNode;
+    wide?: boolean;
+    featured?: boolean;
+}) {
+    return (
+        <div
+            className={[
+                "group relative overflow-hidden rounded-2xl border p-6 transition-all duration-300 sm:p-7",
+                wide ? "lg:col-span-2" : "",
+                featured
+                    ? "lg:col-span-2 border-violet-500/20 bg-gradient-to-br from-violet-950/30 via-violet-950/10 to-transparent hover:border-violet-500/35"
+                    : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12] hover:bg-white/[0.03]",
+            ].join(" ")}
+        >
+            <div className="pointer-events-none absolute -right-12 -top-12 size-48 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.08),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative">
+                <div
+                    className={[
+                        "mb-5 flex size-10 items-center justify-center rounded-xl border",
+                        featured
+                            ? "border-violet-400/25 bg-violet-500/15 text-violet-300"
+                            : "border-violet-500/20 bg-violet-500/10 text-violet-400",
+                    ].join(" ")}
+                >
+                    {icon}
+                </div>
+                <h3 className="mb-2 text-lg font-semibold tracking-tight text-white">{title}</h3>
+                <p className="text-sm leading-7 text-zinc-400">{description}</p>
+                {tags ? (
+                    <div className="mt-5 flex flex-wrap gap-1.5">
+                        {tags.map((t) => (
+                            <span
+                                key={t}
+                                className="rounded-full border border-white/[0.06] bg-white/[0.025] px-2.5 py-1 text-[11px] text-zinc-400"
+                            >
+                                {t}
+                            </span>
+                        ))}
+                    </div>
+                ) : null}
+                {children}
+            </div>
         </div>
     );
 }

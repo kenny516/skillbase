@@ -6,7 +6,7 @@
 
 :root {
   /* ── Core Backgrounds ─────────────────────────── */
-  --background: #09090b;
+  --background: #08080a;
   --background-elevated: #111113;
   --background-overlay: rgba(255, 255, 255, 0.025);
 
@@ -293,6 +293,218 @@ pre,
   padding: 0.1rem 0.32rem;
   font-size: 0.85em;
   font-family: "SF Mono", SFMono-Regular, ui-monospace, Menlo, monospace;
+}
+
+.markdown-preview pre {
+  margin: 0.85rem 0;
+  padding: 0.95rem 1.1rem;
+  background: #0d0d10;
+  color: #e4e4e7;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 0.82em;
+  line-height: 1.65;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.markdown-preview pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.markdown-preview a {
+  color: #6d28d9;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color 0.15s ease;
+}
+
+.markdown-preview a:hover {
+  color: #5b21b6;
+}
+
+.markdown-preview blockquote {
+  margin: 0.85rem 0;
+  padding: 0.45rem 0.95rem;
+  border-left: 3px solid #8b5cf6;
+  background: rgba(139, 92, 246, 0.06);
+  border-radius: 0 8px 8px 0;
+  color: rgba(28, 28, 30, 0.78);
+  font-style: italic;
+}
+
+.markdown-preview blockquote p {
+  margin: 0;
+}
+
+.markdown-preview hr {
+  margin: 1.4rem 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.markdown-preview ol {
+  margin: 0.5rem 0 0;
+  padding-left: 1.4rem;
+  list-style: decimal;
+}
+
+.markdown-preview ol li {
+  margin-bottom: 0.2rem;
+}
+
+.markdown-preview ul ul,
+.markdown-preview ul ol,
+.markdown-preview ol ul,
+.markdown-preview ol ol {
+  margin: 0.25rem 0 0.25rem;
+}
+
+.markdown-preview strong {
+  color: #111113;
+  font-weight: 650;
+}
+
+.markdown-preview em {
+  color: rgba(28, 28, 30, 0.88);
+}
+
+.markdown-preview table {
+  width: 100%;
+  margin: 0.95rem 0;
+  border-collapse: collapse;
+  font-size: 0.85em;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.markdown-preview thead {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.markdown-preview th,
+.markdown-preview td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.markdown-preview th {
+  font-weight: 600;
+  color: #111113;
+}
+
+.markdown-preview tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-preview tbody tr:hover {
+  background: rgba(139, 92, 246, 0.03);
+}
+
+/* Frontmatter rendered as an HR-fenced block — soften it */
+.markdown-preview h1 + p,
+.markdown-preview h2 + p {
+  margin-top: 0.2rem;
+}
+
+/* ── Focus ring — global accessibility ───────────────────── */
+
+*:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.55);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Noise / Grain texture overlay ───────────────────────── */
+
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+}
+
+/* ── Glass card ──────────────────────────────────────────── */
+
+.glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.glass-strong {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 12px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+/* ── Hairline gradient border (uses pseudo) ──────────────── */
+
+.border-grad {
+  position: relative;
+  isolation: isolate;
+}
+.border-grad::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    140deg,
+    rgba(139, 92, 246, 0.5),
+    rgba(255, 255, 255, 0.04) 40%,
+    rgba(139, 92, 246, 0.18)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Shimmer placeholder ─────────────────────────────────── */
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
 }
 
 /* ── Animations ───────────────────────────────────────────── */

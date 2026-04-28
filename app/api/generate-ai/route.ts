@@ -3,10 +3,24 @@ import { NextResponse } from "next/server";
 
 import { geminiModel } from "@/lib/gemini";
 import { generateSkillMarkdown } from "@/lib/markdown";
-import type { SkillFormPayload } from "@/lib/types";
+import { SkillFormSchema } from "@/lib/types";
 
 export async function POST(request: Request) {
-    const payload = (await request.json()) as SkillFormPayload;
+    let body: unknown;
+    try {
+        body = await request.json();
+    } catch {
+        return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    }
+
+    const parsed = SkillFormSchema.safeParse(body);
+    if (!parsed.success) {
+        return NextResponse.json(
+            { error: "Invalid payload", issues: parsed.error.issues },
+            { status: 400 }
+        );
+    }
+    const payload = parsed.data;
 
     const baseDraft = generateSkillMarkdown(payload);
 
@@ -54,9 +68,9 @@ ${baseDraft}`;
             {
                 markdown: baseDraft,
                 error: isQuota
-                    ? "Quota API Gemini épuisée. Vérifie ton plan sur https://ai.google.dev/gemini-api/docs/rate-limits"
+                    ? "Gemini API quota exhausted. Check your plan at https://ai.google.dev/gemini-api/docs/rate-limits"
                     : isCert
-                        ? "Erreur SSL — lance le serveur avec NODE_TLS_REJECT_UNAUTHORIZED=0 ou configure ton certificat CA"
+                        ? "SSL error — configure your corporate CA certificate (set NODE_EXTRA_CA_CERTS to your CA bundle path)"
                         : "AI generation failed, returning base draft",
             },
             { status: 200 }
